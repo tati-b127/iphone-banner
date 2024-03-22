@@ -60,7 +60,16 @@ body {
   }
 }
 .banner {
+    // position: relative;
   margin-top: auto;
+  padding-top: 60px;
+  &__link-cls {
+    position: absolute;
+    left: 24px;
+    top: 72px;
+    width: 12px;
+    height: 12px;
+  }
   &__title {
     text-align: center;
     font-size: 42px;
@@ -83,6 +92,7 @@ body {
       overflow: hidden;
       // background: #15072F;
       img {
+        max-width: 100%;
         width: 100%;
         object-fit: cover;
       }
@@ -150,11 +160,13 @@ body {
     box-sizing: border-box;
     background-color: #23222e;
     color: #ffffff;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out, border 0.3s ease-in-out;
 
     &__title {
       width: 100%;
       text-align: start;
       font-size: clamp(16px, 0.3289rem + 2.1053vw, 1rem);
+      line-height: 100%;
       // font-size: min(max(16px, 4vw), 12px);
       //   font-size: min(4vw, 16px);
       // font-size: max(30vw, 16px);
@@ -170,6 +182,7 @@ body {
       text-align: start;
       white-space: nowrap;
       font-size: clamp(16px, 0.3289rem + 2.1053vw, 1rem);
+      line-height: 100%;
       // font-size: min(max(16px, 4vw), 10px);
       font-weight: 400;
       color: #cbcbcd;
@@ -213,11 +226,15 @@ body {
     justify-content: space-between;
   }
   &__link {
+    text-align: center;
     font-size: 12px;
+    line-height: 100%;
     font-weight: 400;
     color: #ffffff81;
     text-decoration: none;
-    margin: 0 8px;
+    padding: 0 4px;
+    margin: 0 auto;
+    white-space: nowrap;
   }
 }
 @media (min-width: 320px) and (orientation: portrait) {

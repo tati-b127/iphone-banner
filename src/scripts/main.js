@@ -3,6 +3,15 @@ window.addEventListener("DOMContentLoaded", () => {
   const locale = navigator.language;
   const paramLang = new URLSearchParams(window.location.search).get("lang");
   console.log(paramLang);
+  let localeList = {
+    RU: "ru-RU",
+    DE: "de-DE",
+    EN: "en-US",
+    ES: "es-ES",
+    FR: "fr-FR",
+    JA: "ja-JP",
+    PT: "pt-BR",
+  };
   let lang = { de: "de", en: "en", es: "es", fr: "fr", ja: "ja", pt: "pt" };
   Promise.all([
     fetch("locale/de.json"),
@@ -22,25 +31,25 @@ window.addEventListener("DOMContentLoaded", () => {
       return { deJson, enJson, esJson, frJson, jaJson, ptJson };
     })
     .then((response) => {
-      console.log(response);
-      if (paramLang === lang.de) {
+      console.log(navigator.language);
+      if (paramLang === lang.de || locale === localeList.DE) {
         getLocaleText(response.deJson);
-      } else if (paramLang === lang.en) {
+      } else if (paramLang === lang.en || locale === localeList.EN) {
         getLocaleText(response.enJson);
-      } else if (paramLang === lang.es) {
+      } else if (paramLang === lang.es || locale === localeList.ES) {
         getLocaleText(response.esJson);
-      } else if (paramLang === lang.fr) {
+      } else if (paramLang === lang.fr || locale === localeList.FR) {
         getLocaleText(response.frJson);
-      } else if (paramLang === lang.ja) {
+      } else if (paramLang === lang.ja || locale === localeList.JA) {
         console.log(response.jaJson.Continue);
         getLocaleText(response.jaJson);
-      } else if (paramLang === lang.pt) {
+      } else if (paramLang === lang.pt || locale === localeList.PT) {
         getLocaleText(response.ptJson);
       } else {
         getLocaleText(response.enJson);
       }
-      if (locale === "ru-RU") {
-        console.log("Hello");
+      if (locale === localeList.RU) {
+        console.log("You locale ru-RU");
       }
     });
   function getLocaleText(localeJson) {
@@ -62,11 +71,9 @@ window.addEventListener("DOMContentLoaded", () => {
     data.footerLink2STR = arrayKeys[10];
     data.footerLink3STR = arrayKeys[11];
     data.btnContinueSTR = arrayKeys[12];
-    console.log(data);
     createLocalePage(data);
   }
   function createLocalePage(data) {
-    console.log(data);
     const mainTitle = document.getElementById("banner-title");
     const wrapperTitle1 = document.querySelector(
       ".wrapper__item_1 .wrapper__title"
@@ -94,23 +101,21 @@ window.addEventListener("DOMContentLoaded", () => {
     let href = btnTop.dataset.href;
     console.log(href);
 
-    btnTop.addEventListener("click", (event) => {
-      href = event.target.dataset.href;
-
-      if (!event.target.classList.contains("active")) {
+    btnTop.addEventListener("click", () => {
+      href = btnTop.dataset.href;
+      if (!btnTop.classList.contains("active")) {
         btnBottom.classList.remove("active");
-        event.target.classList.add("active");
-      }
+        btnTop.classList.add("active");
+      } else return;
     });
-    btnBottom.addEventListener("click", (event) => {
-      href = event.target.dataset.href;
-
-      if (!event.target.classList.contains("active")) {
+    btnBottom.addEventListener("click", () => {
+      href = btnBottom.dataset.href;
+      if (!btnBottom.classList.contains("active")) {
         btnTop.classList.remove("active");
-        event.target.classList.add("active");
-      }
+        btnBottom.classList.add("active");
+      } else return;
     });
-    btnContinue.addEventListener("click", (event) => {
+    btnContinue.addEventListener("click", () => {
       window.location.href = href;
     });
 
@@ -129,13 +134,11 @@ window.addEventListener("DOMContentLoaded", () => {
     footerLink2.innerHTML = data.footerLink2STR;
     footerLink3.innerHTML = data.footerLink2STR;
     fontsize(btnTop, btnTopTitle, btnTopSubLeft);
+    fontsize(btnBottom, btnTopTitle, btnTopSubLeft);
   }
   function fontsize(btn, btnTitle, btnSubTitle) {
     let blockWidth = btnTitle.offsetWidth;
-    console.log(blockWidth);
-    console.log(btnTitle.innerHTML.length);
     const initialMinFontSize = 16;
-    console.log(initialMinFontSize);
     let maxWidth = btnTitle.clientWidth;
     let maxHeight = btnTitle.clientHeight;
     let fontSize = maxHeight;
