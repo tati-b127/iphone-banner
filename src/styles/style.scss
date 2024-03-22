@@ -25,6 +25,7 @@
   padding: 0;
 }
 body {
+  position: relative;
   background-color: #000000;
   background-image: url("./images/bg.png");
   background-repeat: no-repeat;
@@ -60,7 +61,7 @@ body {
   }
 }
 .banner {
-    // position: relative;
+  // position: relative;
   margin-top: auto;
   padding-top: 60px;
   &__link-cls {
@@ -160,7 +161,8 @@ body {
     box-sizing: border-box;
     background-color: #23222e;
     color: #ffffff;
-    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out, border 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out,
+      border 0.3s ease-in-out;
 
     &__title {
       width: 100%;
@@ -269,13 +271,13 @@ body {
       font-size: clamp(42px, 1.2321rem + 5.7143vw, 2.625rem);
     }
     .btn.continue {
-        margin-bottom: 18px;
+      margin-bottom: 18px;
     }
   }
   .footer {
     &__link {
-        font-size: clamp(12.5px, -0.6429rem + 5.7143vw, 0.75rem);
-    //   font-size: min(max(12px, 4vw), 8px);
+      font-size: clamp(12.5px, -0.6429rem + 5.7143vw, 0.75rem);
+      //   font-size: min(max(12px, 4vw), 8px);
     }
   }
 }
